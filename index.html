@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Student Information Management System (SIMS)</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Student Information Management System (SIMS)</h1>
+    </header>
+
+    <div class="grid">
+      <!-- LEFT: Controls -->
+      <div class="card">
+        <div class="form-group">
+          <label for="studentName">Student Name</label>
+          <input type="text" id="studentName" placeholder="e.g. Juan Dela Cruz" />
+        </div>
+
+        <div class="actions">
+          <button id="btnAdd" class="btn btn-primary">Add Student</button>
+          <button id="btnRemove" class="btn btn-danger">Remove Last Student</button>
+          <button id="btnDisplay" class="btn btn-outline">Display All Students</button>
+        </div>
+
+        <hr />
+
+        <div class="form-group">
+          <label for="positionInput">Position (1-based)</label>
+          <input type="number" id="positionInput" min="1" placeholder="Enter position (1,2,3...)" />
+        </div>
+        <div class="actions">
+          <button id="btnAt" class="btn btn-primary">Show Student at Position</button>
+          <button id="btnCount" class="btn btn-outline">Show Student Count</button>
+          <button id="btnJoin" class="btn btn-outline">Join Student Names</button>
+        </div>
+
+        <div id="result" aria-live="polite">Result area — messages will appear here.</div>
+      </div>
+
+      <!-- RIGHT: Live list & instructions -->
+      <div>
+        <div class="card">
+          <h3>Live Student List</h3>
+          <ol id="studentList"></ol>
+          <hr />
+        </div>
+
+        <div class="card">
+          <h4>Quick Test Buttons</h4>
+          <div class="actions">
+            <button id="seed" class="btn btn-primary">Seed Example Students</button>
+            <button id="clear" class="btn btn-outline">Clear All Students</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>ITP110 prelim assessment</footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
