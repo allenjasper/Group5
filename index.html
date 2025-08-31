@@ -4,64 +4,88 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Student Information Management System (SIMS)</title>
+  <!-- External CSS file for styling -->
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>Student Information Management System (SIMS)</h1>
+  <div class="app-container">
+    
+    <!-- ================= Header Section ================= -->
+    <header class="app-header">
+      <!-- Title of the system -->
+      <h1> Student Information Management System</h1>
     </header>
 
-    <div class="grid">
-      <!-- LEFT: Controls -->
-      <div class="card">
+    <!-- ================= Main Dashboard Section ================= -->
+    <main class="dashboard">
+      
+      <!-- ===== LEFT SIDE: Manage Students Controls ===== -->
+      <section class="card large-card">
+        <h2 class="section-title">Manage Students</h2>
+
+        <!-- Input box for typing student name -->
         <div class="form-group">
           <label for="studentName">Student Name</label>
           <input type="text" id="studentName" placeholder="e.g. Juan Dela Cruz" />
         </div>
 
+        <!-- Buttons for student management -->
         <div class="actions">
-          <button id="btnAdd" class="btn btn-primary">Add Student</button>
-          <button id="btnRemove" class="btn btn-danger">Remove Last Student</button>
-          <button id="btnDisplay" class="btn btn-outline">Display All Students</button>
+          <button id="btnAdd" class="btn btn-primary"> Add Student</button> <!-- Adds student to list -->
+          <button id="btnRemove" class="btn btn-danger"> Remove Last</button> <!-- Removes last student -->
+          <button id="btnDisplay" class="btn btn-outline"> Display All</button> <!-- Shows all students -->
         </div>
 
-        <hr />
+        <!-- Divider line for clarity -->
+        <div class="divider"></div>
 
+        <!-- Input box for choosing a specific student by position -->
         <div class="form-group">
           <label for="positionInput">Position (1-based)</label>
           <input type="number" id="positionInput" min="1" placeholder="Enter position (1,2,3...)" />
         </div>
+
+        <!-- Buttons for position-based and other operations -->
         <div class="actions">
-          <button id="btnAt" class="btn btn-primary">Show Student at Position</button>
-          <button id="btnCount" class="btn btn-outline">Show Student Count</button>
-          <button id="btnJoin" class="btn btn-outline">Join Student Names</button>
+          <button id="btnAt" class="btn btn-primary"> Show Student</button> <!-- Shows student at given position -->
+          <button id="btnCount" class="btn btn-outline"> Count Students</button> <!-- Counts how many students -->
+          <button id="btnJoin" class="btn btn-outline"> Join Names</button> <!-- Joins all names into one string -->
         </div>
 
-        <div id="result" aria-live="polite">Result area — messages will appear here.</div>
-      </div>
+        <!-- Area where results/messages will appear -->
+        <div id="result" aria-live="polite">
+          Result area — messages will appear here.
+        </div>
+      </section>
 
-      <!-- RIGHT: Live list & instructions -->
-      <div>
-        <div class="card">
-          <h3>Live Student List</h3>
-          <ol id="studentList"></ol>
-          <hr />
+      <!-- ===== RIGHT SIDE: Student List and Quick Tools ===== -->
+      <section class="right-column">
+        
+        <!-- Shows current student list -->
+        <div class="card medium-card">
+          <h2 class="section-title">Live Student List</h2>
+          <ol id="studentList"></ol> <!-- Ordered list for student names -->
         </div>
 
-        <div class="card">
-          <h4>Quick Test Buttons</h4>
+        <!-- Quick tool buttons -->
+        <div class="card small-card">
+          <h2 class="section-title">Quick Tools</h2>
           <div class="actions">
-            <button id="seed" class="btn btn-primary">Seed Example Students</button>
-            <button id="clear" class="btn btn-outline">Clear All Students</button>
+            <button id="seed" class="btn btn-primary"> Seed Example</button> <!-- Adds sample students automatically -->
+            <button id="clear" class="btn btn-outline"> Clear All</button> <!-- Clears all students in the list -->
           </div>
         </div>
-      </div>
-    </div>
+      </section>
+    </main>
 
-    <footer>ITP110 prelim assessment</footer>
+    <!-- ================= Footer Section ================= -->
+    <footer class="app-footer">
+      <!-- Footer note -->
+      <p> ITP110 Prelim Assessment </p>
+    </footer>
   </div>
 
+  <!-- External JavaScript file where all button logic is coded -->
   <script src="app.js"></script>
 </body>
 </html>
