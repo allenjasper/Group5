@@ -7,75 +7,60 @@
 }
 
 body {
-  background: linear-gradient(135deg, #e8f0fa, #dce6f5);
+  background: #f2f6fb;
   color: #1e2a38;
   line-height: 1.6;
 }
 
 /* ===== App Layout ===== */
 .app-container {
-  max-width: 1300px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 1.5rem;
 }
 
 /* ===== Header ===== */
 .app-header {
-  background: linear-gradient(90deg, #1e3c72, #2a5298);
+  background: #2a5298;
   color: #fff;
-  padding: 2rem;
-  border-radius: 18px;
+  padding: 1.8rem;
+  border-radius: 12px;
   text-align: center;
-  margin-bottom: 2.5rem;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-  animation: slide-down 0.6s ease-out;
+  margin-bottom: 2rem;
 }
 
 .app-header h1 {
-  font-size: 2.3rem;
+  font-size: 2.2rem;
   font-weight: 700;
-  margin-bottom: 0.4rem;
-}
-
-.app-header .subtitle {
-  font-size: 1.05rem;
-  font-weight: 400;
-  opacity: 0.9;
 }
 
 /* ===== Dashboard Layout ===== */
 .dashboard {
   display: grid;
-  grid-template-columns: 2fr 1.2fr;
+  grid-template-columns: 2fr 1fr;
   gap: 2rem;
 }
 
 @media (max-width: 900px) {
   .dashboard {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; /* Stack columns on tablets */
   }
 }
 
 /* ===== Card Styling ===== */
 .card {
-  background: #f9fbff;
-  border-radius: 16px;
-  padding: 1.8rem;
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
 
 .large-card {
-  min-height: 500px;
+  min-height: 450px;
 }
 
 .medium-card {
-  min-height: 300px;
+  min-height: 250px;
   margin-bottom: 1.5rem;
 }
 
@@ -85,18 +70,18 @@ body {
 
 /* ===== Section Title ===== */
 .section-title {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   font-weight: 600;
-  margin-bottom: 1.3rem;
-  color: #1e3c72;
-  border-left: 5px solid #2a5298;
-  padding-left: 0.75rem;
+  margin-bottom: 1.2rem;
+  color: #2a5298;
+  border-left: 4px solid #2a5298;
+  padding-left: 0.6rem;
 }
 
 /* ===== Divider ===== */
 .divider {
   margin: 1.5rem 0;
-  border-top: 1.5px dashed #ccd6e0;
+  border-top: 1px solid #ccd6e0;
 }
 
 /* ===== Form Elements ===== */
@@ -106,7 +91,7 @@ body {
 
 label {
   display: block;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.4rem;
   font-weight: 500;
   color: #2d3e50;
 }
@@ -115,18 +100,16 @@ input[type="text"],
 input[type="number"] {
   width: 100%;
   padding: 0.8rem;
-  border: 1.6px solid #b5c7da;
+  border: 1px solid #b5c7da;
   background: #fff;
   color: #1e2a38;
-  border-radius: 10px;
+  border-radius: 8px;
   font-size: 0.95rem;
-  transition: border 0.3s, box-shadow 0.3s;
 }
 
 input:focus {
   border-color: #2a5298;
   outline: none;
-  box-shadow: 0 0 6px rgba(42, 82, 152, 0.25);
 }
 
 /* ===== Buttons ===== */
@@ -138,61 +121,37 @@ input:focus {
 }
 
 .btn {
-  padding: 0.8rem 1.5rem;
-  border-radius: 10px;
+  padding: 0.75rem 1.4rem;
+  border-radius: 8px;
   border: none;
   cursor: pointer;
   font-weight: 600;
   font-size: 0.95rem;
-  transition: background 0.3s, transform 0.2s;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
 }
 
-.btn:hover {
-  transform: translateY(-2px);
-}
-
-/* Primary button */
 .btn-primary {
-  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  background: #2a5298;
   color: #fff;
 }
 
-.btn-primary:hover {
-  background: linear-gradient(135deg, #162f59, #224680);
-}
-
-/* Danger button */
 .btn-danger {
   background: #e63946;
   color: #fff;
 }
 
-.btn-danger:hover {
-  background: #c92c3a;
-}
-
-/* Outline button */
 .btn-outline {
   background: transparent;
-  border: 2px solid #2a5298;
+  border: 1px solid #2a5298;
   color: #2a5298;
-}
-
-.btn-outline:hover {
-  background: #2a5298;
-  color: #fff;
 }
 
 /* ===== Result Area ===== */
 #result {
   background: #eef3fb;
-  border-left: 5px solid #2a5298;
+  border-left: 4px solid #2a5298;
   padding: 1rem;
-  margin-top: 1.2rem;
-  border-radius: 10px;
+  margin-top: 1rem;
+  border-radius: 8px;
   font-size: 0.95rem;
   min-height: 55px;
   color: #2a3c55;
@@ -205,7 +164,7 @@ input:focus {
 }
 
 #studentList li {
-  padding: 0.6rem 0;
+  padding: 0.5rem 0;
   border-bottom: 1px solid #dde5f0;
   font-size: 0.95rem;
   color: #1e2a38;
@@ -214,44 +173,60 @@ input:focus {
 /* ===== Footer ===== */
 .app-footer {
   text-align: center;
-  margin-top: 2.5rem;
-  padding: 1.2rem;
-  font-size: 0.95rem;
+  margin-top: 2rem;
+  padding: 1rem;
+  font-size: 0.9rem;
   color: #fff;
-  background: linear-gradient(90deg, #1e3c72, #2a5298);
-  border-radius: 14px;
+  background: #2a5298;
+  border-radius: 10px;
 }
 
-
-/* ===== Animations ===== */
-@keyframes slide-down {
-  from {
-    transform: translateY(-20px);
-    opacity: 0;
+/* ===== Responsive Adjustments ===== */
+@media (max-width: 768px) {
+  .app-header h1 {
+    font-size: 1.8rem;
   }
-  to {
-    transform: translateY(0);
-    opacity: 1;
+
+  .btn {
+    width: 100%; /* Full-width buttons on tablets/mobiles */
+    justify-content: center;
   }
-}
 
-.fade-in {
-  opacity: 0;
-  animation: fadeIn 0.8s forwards;
-}
-
-.fade-in.delay-1 {
-  animation-delay: 0.2s;
-}
-
-.fade-in.delay-2 {
-  animation-delay: 0.4s;
-}
-
-@keyframes fadeIn {
-  to {
-    opacity: 1;
+  input[type="text"],
+  input[type="number"] {
+    font-size: 0.9rem;
+    padding: 0.7rem;
   }
 }
 
+@media (max-width: 480px) {
+  .app-container {
+    padding: 1rem;
+  }
 
+  .app-header {
+    padding: 1.2rem;
+  }
+
+  .app-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .section-title {
+    font-size: 1.1rem;
+  }
+
+  .card {
+    padding: 1rem;
+  }
+
+  .btn {
+    font-size: 0.85rem;
+    padding: 0.6rem 1rem;
+  }
+
+  #result {
+    font-size: 0.85rem;
+    padding: 0.8rem;
+  }
+}
