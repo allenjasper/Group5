@@ -1,102 +1,148 @@
-// === Student Information Management System (SIMS) ===
+// === Student Information Management System ===
 
-// students array (single source of truth)
-const students = [];
+// Store all student names
+const studentList = [];
 
-// UI elements
-const elName = document.getElementById('studentName');
-const elPos = document.getElementById('positionInput');
-const elResult = document.getElementById('result');
-const elList = document.getElementById('studentList');
+// DOM elements
+const studentNameInput = document.getElementById('studentName');
+const positionInput = document.getElementById('positionInput');
+const resultOutput = document.getElementById('result');
+const studentListDisplay = document.getElementById('studentList');
 
-// 1) addStudent
+// Add a new student to the list
 function addStudent() {
-  const name = (elName.value || '').trim();
-  if (!name) return showMessage('Please enter a student name before adding.');
-  students.push(name);
-  showMessage(`Added: "${name}"`);
-  renderList();
-  elName.value = '';
-  elName.focus();
+  const name = studentNameInput.value.trim();
+  if (!name) {
+    showMessage('Please enter a student name.');
+    return;
+  }
+  
+  studentList.push(name);
+  showMessage(`Added student: ${name}`);
+  updateListDisplay();
+  studentNameInput.value = '';
+  studentNameInput.focus();
 }
 
-// 2) removeStudent
-function removeStudent() {
-  if (students.length === 0) return showMessage('List is already empty.');
-  const removed = students.pop();
-  showMessage(`Removed last student: "${removed}"`);
-  renderList();
+// Remove the last student from the list
+function removeLastStudent() {
+  if (studentList.length === 0) {
+    showMessage('No students to remove.');
+    return;
+  }
+  
+  const removedStudent = studentList.pop();
+  showMessage(`Removed: ${removedStudent}`);
+  updateListDisplay();
 }
 
-// 3) displayStudents
-function displayStudents() {
-  if (students.length === 0) return showMessage('No students to display.');
-  const content = students.map((s, i) => `${i+1}. ${s}`).join('\n');
-  showMessage('Students:\n' + content);
-  renderList();
+// Display all students with numbering
+function showAllStudents() {
+  if (studentList.length === 0) {
+    showMessage('No students to show.');
+    return;
+  }
+  
+  const formattedList = studentList
+    .map((student, index) => `${index + 1}. ${student}`)
+    .join('\n');
+  showMessage(`Students:\n${formattedList}`);
+  updateListDisplay();
 }
 
-// 4) showCount
-function showCount() {
-  showMessage(`Total students: ${students.length}`);
-  renderList();
+// Show total number of students
+function showStudentCount() {
+  showMessage(`Total students: ${studentList.length}`);
+  updateListDisplay();
 }
 
-// 5) showStudentAt
-function showStudentAt() {
-  const raw = elPos.value;
-  const pos = Number(raw);
-  if (!raw || Number.isNaN(pos) || pos < 1 || !Number.isInteger(pos))
-    return showMessage('Enter a valid position (1,2,3...).');
-  const idx = pos - 1;
-  if (idx < 0 || idx >= students.length)
-    return showMessage(`Position ${pos} is out of range. Total: ${students.length}`);
-  const name = students.at(idx);
-  showMessage(`Student at position ${pos}: "${name}"`);
-  renderList();
+// Show student at specific position
+function showStudentAtPosition() {
+  const position = Number(positionInput.value);
+  
+  if (!positionInput.value || isNaN(position) || position < 1 || !Number.isInteger(position)) {
+    showMessage('Please enter a valid position (1, 2, 3...).');
+    return;
+  }
+  
+  const index = position - 1;
+  if (index < 0 || index >= studentList.length) {
+    showMessage(`Position ${position} is invalid. Total students: ${studentList.length}`);
+    return;
+  }
+  
+  const student = studentList[index];
+  showMessage(`Student at position ${position}: ${student}`);
+  updateListDisplay();
 }
 
-// 6) joinStudentNames
+// Join all student names with commas
 function joinStudentNames() {
-  if (students.length === 0) return showMessage('No students to join.');
-  const joined = students.join(', ');
-  showMessage('Joined names:\n' + joined);
-  renderList();
+  if (studentList.length === 0) {
+    showMessage('No students to join.');
+    return;
+  }
+  
+  const joinedNames = studentList.join(', ');
+  showMessage(`All students: ${joinedNames}`);
+  updateListDisplay();
 }
 
-// Helpers
-function renderList() {
-  elList.innerHTML = '';
-  students.forEach((s) => {
-    const li = document.createElement('li');
-    li.textContent = s;
-    elList.appendChild(li);
+// Update the displayed student list
+function updateListDisplay() {
+  studentListDisplay.innerHTML = '';
+  studentList.forEach(student => {
+    const listItem = document.createElement('li');
+    listItem.textContent = student;
+    studentListDisplay.appendChild(listItem);
   });
 }
-function showMessage(msg) {
-  elResult.textContent = msg;
-  console.log('[SIMS]', msg);
-}
-function seedExample() {
-  students.push('Allen Ararao', 'Kyo Abaquita', 'Hans Consuelo', 'Harvy Penaflor', 'Charles Angeles', 'Crystal Barayang', 'Patrick Aidalla', 'Jay Louis Bantugon', 'Mary Ann Garganera' );
-  showMessage('Seeded 3 example students.');
-  renderList();
-}
-function clearAll() {
-  students.length = 0;
-  showMessage('Cleared all students.');
-  renderList();
+
+// Display messages in the result area
+function showMessage(message) {
+  resultOutput.textContent = message;
+  console.log('[Student System]', message);
 }
 
-// Event listeners
+// Add example students
+function addSampleStudents() {
+  const sampleStudents = [
+    'Allen Ararao',
+    'Kyo Abaquita',
+    'Hans Consuelo',
+    'Harvy Penaflor',
+    'Charles Angeles',
+    'Crystal Barayang',
+    'Patrick Aidalla',
+    'Jay Louis Bantugon',
+    'Mary Ann Garganera'
+  ];
+  
+  studentList.push(...sampleStudents);
+  showMessage(`Added ${sampleStudents.length} sample students.`);
+  updateListDisplay();
+}
+
+// Clear all students
+function clearAllStudents() {
+  studentList.length = 0;
+  showMessage('All students cleared.');
+  updateListDisplay();
+}
+
+// Add event listeners for buttons
 document.getElementById('btnAdd').addEventListener('click', addStudent);
-document.getElementById('btnRemove').addEventListener('click', removeStudent);
-document.getElementById('btnDisplay').addEventListener('click', displayStudents);
-document.getElementById('btnCount').addEventListener('click', showCount);
-document.getElementById('btnAt').addEventListener('click', showStudentAt);
+document.getElementById('btnRemove').addEventListener('click', removeLastStudent);
+document.getElementById('btnDisplay').addEventListener('click', showAllStudents);
+document.getElementById('btnCount').addEventListener('click', showStudentCount);
+document.getElementById('btnAt').addEventListener('click', showStudentAtPosition);
 document.getElementById('btnJoin').addEventListener('click', joinStudentNames);
-document.getElementById('seed').addEventListener('click', seedExample);
-document.getElementById('clear').addEventListener('click', clearAll);
+document.getElementById('seed').addEventListener('click', addSampleStudents);
+document.getElementById('clear').addEventListener('click', clearAllStudents);
 
-// Enter key support
-elName.addEventListener('keydown', (e) => { if (e.key === 'Enter') addStudent(); });
+// Allow adding student with Enter key
+studentNameInput.addEventListener('keydown', (event) => {
+  if (event.key === 'Enter') {
+    addStudent();
+  }
+});
