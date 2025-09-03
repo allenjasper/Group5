@@ -78,7 +78,7 @@ function showMessage(msg) {
   console.log('[SIMS]', msg);
 }
 function seedExample() {
-  students.push('Allen Ararao', 'Kyo Abaquita', 'Hans Consuelo');
+  students.push('Allen Ararao', 'Kyo Abaquita', 'Hans Consuelo', 'Harvy Penaflor', 'Charles Angeles', 'Crystal Barayang', 'Patrick Aidalla', 'Jay Louis Bantugon', 'Mary Ann Garganera' );
   showMessage('Seeded 3 example students.');
   renderList();
 }
