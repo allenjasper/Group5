@@ -141,3 +141,280 @@ This system demonstrates **JavaScript array methods** (`push()`, `pop()`, `lengt
 - Pressing **Enter** inside the input field also runs `addStudent()`.  
 
 
+
+// === Student Information Management System === 
+
+// Array to store all student names (acts like our database)
+const studentList = [];
+
+
+// === DOM elements ===
+const studentNameInput = document.getElementById('studentName'); // Input box for entering student name
+const positionInput = document.getElementById('positionInput'); // Input box for student position
+const resultOutput = document.getElementById('result'); // Area where messages are displayed
+const studentListDisplay = document.getElementById('studentList'); // UL/OL element to display student names
+
+
+
+// === Add a new student to the list ===
+function addStudent() {
+  const name = studentNameInput.value.trim(); // Read and trim input
+
+  if (!name) { // If empty input
+    showMessage('Please enter a student name.');
+    return;
+  }
+
+  studentList.push(name); // Add student to array
+  showMessage(`Added student: ${name}`); // Confirmation message
+  updateListDisplay(); // Refresh the displayed student list
+
+  studentNameInput.value = ''; // Clear input field
+  studentNameInput.focus(); // Focus input for faster entry
+}
+
+
+
+// === Remove the last student from the list ===
+function removeLastStudent() {
+  if (studentList.length === 0) { // Check if list is empty
+    showMessage('No students to remove.');
+    return;
+  }
+
+  const removedStudent = studentList.pop(); // Remove last element
+  showMessage(`Removed: ${removedStudent}`); // Show removed student
+  updateListDisplay(); // Refresh displayed list
+}
+
+
+
+// === Display all students with numbering ===
+function showAllStudents() {
+  if (studentList.length === 0) { // If list is empty
+    showMessage('No students to show.');
+    return;
+  }
+
+  // Map each student with numbering, then join with line breaks
+  const formattedList = studentList
+    .map((student, index) => `${index + 1}. ${student}`)
+    .join('\n');
+
+  showMessage(`Students:\n${formattedList}`);
+  updateListDisplay();
+}
+
+
+
+// === Show total number of students ===
+function showStudentCount() {
+  showMessage(`Total students: ${studentList.length}`); // Display array length
+  updateListDisplay();
+}
+
+
+
+// === Show student at a specific position ===
+function showStudentAtPosition() {
+  const position = Number(positionInput.value); // Read input and convert to number
+
+  // Validate position input
+  if (!positionInput.value || isNaN(position) || position < 1 || !Number.isInteger(position)) {
+    showMessage('Please enter a valid position (1, 2, 3...).');
+    return;
+  }
+
+  const index = position - 1; // Convert human position to array index
+  if (index < 0 || index >= studentList.length) { // Out of range check
+    showMessage(`Position ${position} is invalid. Total students: ${studentList.length}`);
+    return;
+  }
+
+  const student = studentList[index]; // Get student by index
+  showMessage(`Student at position ${position}: ${student}`);
+  updateListDisplay();
+}
+
+
+
+// === Join all student names into one string ===
+function joinStudentNames() {
+  if (studentList.length === 0) { // If no students
+    showMessage('No students to join.');
+    return;
+  }
+
+  const joinedNames = studentList.join(', '); // Join with commas
+  showMessage(`All students: ${joinedNames}`);
+  updateListDisplay();
+}
+
+
+
+// === Update the displayed student list on the page ===
+function updateListDisplay() {
+  studentListDisplay.innerHTML = ''; // Clear existing list
+
+  studentList.forEach(student => { // Loop through all students
+    const listItem = document.createElement('li'); // Create list item
+    listItem.textContent = student; // Add student name
+    studentListDisplay.appendChild(listItem); // Append to UL/OL
+  });
+}
+
+
+
+// === Display messages in the result area ===
+function showMessage(message) {
+  resultOutput.textContent = message; // Display message in UI
+  console.log('[Student System]', message); // Also log to console
+}
+
+
+
+// === Add example students (seed data) ===
+function addSampleStudents() {
+  const sampleStudents = [
+    'Allen Ararao',
+    'Kyo Abaquita',
+    'Hans Consuelo',
+    'Harvy Penaflor',
+    'Charles Angeles',
+    'Crystal Barayang',
+    'Patrick Aidalla',
+    'Jay Louis Bantugon',
+    'Mary Ann Garganera'
+  ];
+
+  studentList.push(...sampleStudents); // Add all sample students at once
+  showMessage(`Added ${sampleStudents.length} sample students.`);
+  updateListDisplay();
+}
+
+
+
+// === Clear all students from the list ===
+function clearAllStudents() {
+  studentList.length = 0; // Reset array
+  showMessage('All students cleared.');
+  updateListDisplay();
+}
+
+
+
+// === Add event listeners for buttons ===
+document.getElementById('btnAdd').addEventListener('click', addStudent);
+document.getElementById('btnRemove').addEventListener('click', removeLastStudent);
+document.getElementById('btnDisplay').addEventListener('click', showAllStudents);
+document.getElementById('btnCount').addEventListener('click', showStudentCount);
+document.getElementById('btnAt').addEventListener('click', showStudentAtPosition);
+document.getElementById('btnJoin').addEventListener('click', joinStudentNames);
+document.getElementById('seed').addEventListener('click', addSampleStudents);
+document.getElementById('clear').addEventListener('click', clearAllStudents);
+
+
+
+// === Allow adding student with Enter key ===
+studentNameInput.addEventListener('keydown', (event) => {
+  if (event.key === 'Enter') { // If Enter key is pressed
+    addStudent(); // Call addStudent
+  }
+});
+
+
+
+
+
+Core Idea
+
+studentList = array storing all student names.
+
+UI is updated using updateListDisplay() and messages shown via showMessage().
+
+📋 Functions & Debugging Focus
+1. addStudent()
+
+What it does: Adds student from input to studentList.
+
+Check: Is input empty?
+
+Common Bug: Empty string still added if trim() is missing.
+
+2. removeLastStudent()
+
+What it does: Removes last student with .pop().
+
+Check: Is list empty first?
+
+Common Bug: Trying to remove when list is empty.
+
+3. showAllStudents()
+
+What it does: Displays numbered list of all students.
+
+Check: Is list empty?
+
+Common Bug: Output shows nothing if join('\n') is replaced incorrectly.
+
+4. showStudentCount()
+
+What it does: Displays number of students.
+
+Check: studentList.length value.
+
+Common Bug: Count doesn’t match because add/remove didn’t update array.
+
+5. showStudentAtPosition()
+
+What it does: Shows student at chosen position.
+
+Check: Is position valid integer ≥ 1? Is it within list range?
+
+Common Bug: Off-by-one error (position vs index).
+
+6. joinStudentNames()
+
+What it does: Joins all names into one string.
+
+Check: Is list empty first?
+
+Common Bug: Extra commas if join logic is wrong.
+
+7. addSampleStudents()
+
+What it does: Seeds predefined students.
+
+Check: Are duplicates being added?
+
+Common Bug: Multiple clicks = duplicate students.
+
+8. clearAllStudents()
+
+What it does: Clears the list (length = 0).
+
+Check: Does updateListDisplay() refresh UI?
+
+Common Bug: List still shows old names if display not updated.
+
+🔄 Helper Functions
+
+updateListDisplay() → Refreshes <ul> with student names.
+
+showMessage(msg) → Shows message on screen + console.
+
+🎯 Debugging Checklist
+
+Input validation – Is value empty? Is number valid?
+
+Array state – console.log(studentList) after each action.
+
+Edge cases –
+
+Empty list.
+
+Invalid position.
+
+Multiple seed additions.
+
+UI update – Did updateListDisplay() run?
